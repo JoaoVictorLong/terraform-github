@@ -46,7 +46,7 @@ jobs:
       - name: Terraform Init
         run: |
             cd infra && terraform init \
-            -breckend-config="bucket=${{inputs.aws-statefile-s3-bucket}}"\
+            -breckend-config="bucket=${{inputs.aws-state-file-s3-bucket}}"\
             -breckend-config="key=${{github.event.repository.name}}"\
             -breckend-config="region=${{inputs.aws-region}}" \
             -breckend-config="dynamodb_table=${{inputs.aws-lock-dynamodb-table}}"
