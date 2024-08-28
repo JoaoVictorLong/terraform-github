@@ -45,7 +45,7 @@ jobs:
      
       - name: Read Destroy Configuration
         id: read-destroy-config
-        run:
+        run: |
           DESTROY="$(jq -r '.${{ inputs.environment }}' ./infra/destroy.json)"
           echo "destroy=$(echo $DESTROY)" >> $GITHUB_OUTPUT
       
@@ -58,14 +58,14 @@ jobs:
             -backend-config="region=${{inputs.aws-region}}" \
             -backend-config="dynamodb_table=${{inputs.aws-lock-dynamodb-table}}"
       
+      - name: Terraform Variadate
+        run: terraform validate
+      
       - name: Destroy terrafor
         if: steps.read-destroy-config.outputs.destroy == 'true'
         id: terraform-destroy
         run:
           cd infra && terraform workspace select ${{inputs.environment}} || terraform workspace new ${{inputs.environment}} && terraform destroy -var-file="./env/${{inputs.environment}}/terraform.tfvars" -out="${{inputs.environment}}.plan" -auto-approve
-      
-      - name: Terraform Variadate
-        run: terraform validate
       
       - name: Terraform Plan
         if: steps.read-destroy-config.outputs.destroy != 'true'
