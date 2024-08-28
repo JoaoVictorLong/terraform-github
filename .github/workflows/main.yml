@@ -1,4 +1,4 @@
-name: "Prod DEPLOY"
+name: "Prode DEPLOY"
 
 on:
     push:
