@@ -13,7 +13,7 @@ jobs:
         uses: ./.github/workflows/terraform.yml
         with:
             environment: dev
-            aws-assume-role-arn: "arn:aws:iam::699475947366:oidc-provider/token.actions.githubusercontent.com"
+            aws-assume-role-arn: "arn:aws:iam::699475947366:role/gitHub-Actions-Terraform"
             aws-region: "us-east-1"
             aws-state-file-s3-bucket: "github-terraform-joaovictorlong"
             aws-lock-dynamodb-table: "github-terraform-joaovictorlong"
