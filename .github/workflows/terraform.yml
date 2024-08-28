@@ -46,10 +46,10 @@ jobs:
       - name: Terraform Init
         run: |
             cd infra && terraform init \
-            -breckend-config="bucket=${{inputs.aws-state-file-s3-bucket}}" \
-            -breckend-config="key=${{github.event.repository.name}}" \
-            -breckend-config="region=${{inputs.aws-region}}" \
-            -breckend-config="dynamodb_table=${{inputs.aws-lock-dynamodb-table}}"
+            -backend-config="bucket=${{inputs.aws-state-file-s3-bucket}}" \
+            -backend-config="key=${{github.event.repository.name}}" \
+            -backend-config="region=${{inputs.aws-region}}" \
+            -backend-config="dynamodb_table=${{inputs.aws-lock-dynamodb-table}}"
       
       - name: Terraform Variadate
         run: terraform validate
